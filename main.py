@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime
 from os.path import exists
 import requests
@@ -55,3 +56,4 @@ with open(meat_html,'r') as fp:
     out_file = open('prices_{}.json'.format(datetime.now().strftime("%Y%m%d_%H%M%S")),'w')
     json.dump(prices, out_file)
     print(json.dumps(prices))
+    os.rename(meat_html, 'done_{}_{}'.format(datetime.now().strftime("%Y%m%d_%H%M%S"), meat_html))
