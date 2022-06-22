@@ -30,7 +30,8 @@ if not exists(meat_html):
                     meat_url = '{}{}'.format(url,  urldept.attrs.get('href'))
 
 
-    meat_page = requests.get(meat_url)
+    # print(meat_url)
+    meat_page = requests.get(f'{meat_url}?No=0&Nrpp=1000')
     with open(meat_html,'w') as fp:
         fp.write(meat_page.text)
         fp.close()
@@ -46,6 +47,7 @@ with open(meat_html,'r') as fp:
     for prod in products:
         prices.append({
             "onPromotion":prod['attributes'].get('OnPromotion'),
+            "promo":prod['attributes'].get('PROMOTION'),
             "name": prod['attributes'].get('p_displayName'),
             "unitPrice": prod['startingPrice'].get('p_pl00_kilogramPrice'),
             "price":prod['startingPrice'].get('p_pl00')
